@@ -16,7 +16,7 @@
  */
 package org.camunda.spin.plugin.script;
 
-import org.camunda.bpm.engine.impl.test.PluggableProcessEngineTestCase;
+import org.camunda.bpm.engine.test.util.PluggableProcessEngineTest;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
@@ -30,7 +30,7 @@ import java.util.Map;
  * @author Daniel Meyer
  *
  */
-public class SpinScriptTaskSupportWithAutoStoreScriptVariablesTest extends PluggableProcessEngineTestCase {
+public class SpinScriptTaskSupportWithAutoStoreScriptVariablesTest extends PluggableProcessEngineTest {
 
   protected static String TEST_SCRIPT = "var_s = S('{}')\n" +
                                         "var_xml = XML('<root/>')\n" +

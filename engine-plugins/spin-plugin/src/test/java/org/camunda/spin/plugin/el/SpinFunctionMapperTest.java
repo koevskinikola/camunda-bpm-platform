@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.camunda.bpm.engine.delegate.Expression;
-import org.camunda.bpm.engine.impl.test.PluggableProcessEngineTestCase;
+import org.camunda.bpm.engine.test.util.PluggableProcessEngineTest;
 import org.camunda.bpm.engine.repository.Deployment;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.model.bpmn.Bpmn;
@@ -35,7 +35,7 @@ import org.camunda.spin.xml.SpinXmlElement;
  * @author Daniel Meyer
  *
  */
-public class SpinFunctionMapperTest extends PluggableProcessEngineTestCase {
+public class SpinFunctionMapperTest extends PluggableProcessEngineTest {
 
   String xmlString = "<elementName attrName=\"attrValue\" />";
   String jsonString = "{\"foo\": \"bar\"}";

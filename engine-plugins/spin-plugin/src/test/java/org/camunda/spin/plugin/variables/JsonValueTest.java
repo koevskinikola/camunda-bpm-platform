@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.camunda.bpm.engine.ProcessEngineException;
-import org.camunda.bpm.engine.impl.test.PluggableProcessEngineTestCase;
+import org.camunda.bpm.engine.test.util.PluggableProcessEngineTest;
 import org.camunda.bpm.engine.runtime.VariableInstance;
 import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.engine.test.Deployment;
@@ -48,7 +48,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
  * @author Roman Smirnov
  *
  */
-public class JsonValueTest extends PluggableProcessEngineTestCase {
+public class JsonValueTest extends PluggableProcessEngineTest {
 
   protected static final String ONE_TASK_PROCESS = "org/camunda/spin/plugin/oneTaskProcess.bpmn20.xml";
   protected static final String JSON_FORMAT_NAME = DataFormats.JSON_DATAFORMAT_NAME;

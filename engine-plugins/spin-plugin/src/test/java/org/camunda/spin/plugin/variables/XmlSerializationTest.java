@@ -27,7 +27,7 @@ import java.util.List;
 import org.camunda.bpm.engine.ProcessEngineException;
 import org.camunda.bpm.engine.impl.interceptor.Command;
 import org.camunda.bpm.engine.impl.interceptor.CommandContext;
-import org.camunda.bpm.engine.impl.test.PluggableProcessEngineTestCase;
+import org.camunda.bpm.engine.test.util.PluggableProcessEngineTest;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.runtime.VariableInstance;
 import org.camunda.bpm.engine.task.Task;
@@ -44,7 +44,7 @@ import org.camunda.spin.DataFormats;
 import org.camunda.spin.Spin;
 import org.camunda.spin.xml.SpinXmlElement;
 
-public class XmlSerializationTest extends PluggableProcessEngineTestCase {
+public class XmlSerializationTest extends PluggableProcessEngineTest {
 
   protected static final String ONE_TASK_PROCESS = "org/camunda/spin/plugin/oneTaskProcess.bpmn20.xml";
 

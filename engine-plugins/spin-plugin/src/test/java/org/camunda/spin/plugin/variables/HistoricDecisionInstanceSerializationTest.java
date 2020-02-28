@@ -21,14 +21,14 @@ import java.util.List;
 import org.camunda.bpm.engine.history.HistoricDecisionInputInstance;
 import org.camunda.bpm.engine.history.HistoricDecisionInstance;
 import org.camunda.bpm.engine.history.HistoricDecisionOutputInstance;
-import org.camunda.bpm.engine.impl.test.PluggableProcessEngineTestCase;
+import org.camunda.bpm.engine.test.util.PluggableProcessEngineTest;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.variable.VariableMap;
 import org.camunda.bpm.engine.variable.Variables;
 import org.camunda.bpm.engine.variable.value.ObjectValue;
 import org.camunda.spin.DataFormats;
 
-public class HistoricDecisionInstanceSerializationTest extends PluggableProcessEngineTestCase {
+public class HistoricDecisionInstanceSerializationTest extends PluggableProcessEngineTest {
 
   @Deployment(resources = {"org/camunda/spin/plugin/DecisionSingleOutput.dmn11.xml"})
   public void testListJsonProperty() {

@@ -21,7 +21,7 @@ import java.net.URL;
 import java.util.Collections;
 
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
-import org.camunda.bpm.engine.impl.test.PluggableProcessEngineTestCase;
+import org.camunda.bpm.engine.test.util.PluggableProcessEngineTest;
 import org.camunda.bpm.engine.impl.variable.serializer.DefaultVariableSerializers;
 import org.camunda.spin.DataFormats;
 import org.camunda.spin.plugin.variable.type.JsonValueType;
@@ -32,7 +32,7 @@ import org.mockito.Mockito;
  * @author Ronny Bräunlich
  *
  */
-public class SpinProcessEnginePluginTest extends PluggableProcessEngineTestCase {
+public class SpinProcessEnginePluginTest extends PluggableProcessEngineTest {
 
   public void testPluginDoesNotRegisterXmlSerializerIfNotPresentInClasspath() throws IOException {
     ClassLoader mockClassloader = Mockito.mock(ClassLoader.class);

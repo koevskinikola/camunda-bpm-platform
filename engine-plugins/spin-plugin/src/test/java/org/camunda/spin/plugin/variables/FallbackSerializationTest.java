@@ -17,7 +17,7 @@
 package org.camunda.spin.plugin.variables;
 
 import org.camunda.bpm.engine.ProcessEngineException;
-import org.camunda.bpm.engine.impl.test.PluggableProcessEngineTestCase;
+import org.camunda.bpm.engine.test.util.PluggableProcessEngineTest;
 import org.camunda.bpm.engine.impl.variable.serializer.VariableSerializerFactory;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.test.Deployment;
@@ -30,7 +30,7 @@ import org.junit.Test;
  * @author Thorben Lindhauer
  *
  */
-public class FallbackSerializationTest extends PluggableProcessEngineTestCase {
+public class FallbackSerializationTest extends PluggableProcessEngineTest {
 
   protected static final String ONE_TASK_PROCESS = "org/camunda/spin/plugin/oneTaskProcess.bpmn20.xml";
 
