@@ -20,6 +20,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.util.Enumeration;
 import java.util.List;
 
 import org.camunda.bpm.engine.ProcessEngine;
@@ -34,15 +38,20 @@ import org.junit.Test;
  */
 public class ProcessEnginesTest {
 
+  ClassLoader originalClassLoader;
+
   @Before
   public void setUp() throws Exception {
+    Thread currentThread = Thread.currentThread();
+    originalClassLoader = currentThread.getContextClassLoader();
+    currentThread.setContextClassLoader(new TestClassLoader());
     ProcessEngines.destroy();
-    ProcessEngines.init();
   }
 
   @After
   public void tearDown() throws Exception {
     ProcessEngines.destroy();
+    Thread.currentThread().setContextClassLoader(originalClassLoader);
   }
 
   @Test
@@ -65,4 +74,20 @@ public class ProcessEnginesTest {
     assertNotNull(processEngine);
   }
 
+  public static class TestClassLoader extends URLClassLoader {
+
+    public TestClassLoader() {
+      super(((URLClassLoader)getSystemClassLoader()).getURLs());
+    }
+
+    @Override
+    public Enumeration<URL> getResources(String name) throws IOException {
+
+      if ("camunda.cfg.xml".equalsIgnoreCase(name)) {
+        name = "camunda.cfg.h2.xml";
+      }
+
+      return super.getResources(name);
+    }
+  }
 }
