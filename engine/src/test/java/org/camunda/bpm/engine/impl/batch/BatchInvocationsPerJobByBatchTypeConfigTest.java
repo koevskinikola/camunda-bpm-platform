@@ -23,9 +23,9 @@ import java.util.Map;
 
 import ch.qos.logback.classic.Level;
 import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.ProcessEngineConfiguration;
 import org.camunda.bpm.engine.batch.Batch;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
+import org.camunda.bpm.engine.test.util.TestProcessEngineConfiguration;
 import org.camunda.commons.testing.ProcessEngineLoggingRule;
 import org.junit.After;
 import org.junit.Before;
@@ -49,7 +49,7 @@ public class BatchInvocationsPerJobByBatchTypeConfigTest {
 
   @Before
   public void setup() {
-    processEngine = ProcessEngineConfiguration
+    processEngine = TestProcessEngineConfiguration
         .createProcessEngineConfigurationFromResource(PROCESS_ENGINE_CONFIG)
         .buildProcessEngine();
 

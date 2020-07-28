@@ -32,6 +32,7 @@ import org.camunda.bpm.engine.identity.User;
 import org.camunda.bpm.engine.impl.identity.DefaultPasswordPolicyImpl;
 import org.camunda.bpm.engine.impl.identity.PasswordPolicyUserDataRuleImpl;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
+import org.camunda.bpm.engine.test.util.ProvidedProcessEngineRule;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -43,7 +44,7 @@ public class PasswordPolicyUserDataTest {
   public static final String CANDIDATE_PASSWORD = "mypassword";
 
   @Rule
-  public ProcessEngineRule engineRule = new ProcessEngineRule(true);
+  public ProcessEngineRule engineRule = new ProvidedProcessEngineRule();
 
   @Rule
   public ExpectedException thrown = ExpectedException.none();

@@ -43,6 +43,7 @@ import org.camunda.bpm.engine.impl.util.ClockUtil;
 import org.camunda.bpm.engine.impl.util.JsonUtil;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.test.RequiredHistoryLevel;
+import org.camunda.bpm.engine.test.util.TestProcessEngineConfiguration;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -65,21 +66,21 @@ public class HistoryCleanupOnEngineBootstrapTest {
 
     // given
     // create history cleanup job
-    ProcessEngineConfiguration
+    TestProcessEngineConfiguration
       .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/history/batchwindow.camunda.cfg.xml")
       .buildProcessEngine()
       .close();
 
     // when
     // suspend history cleanup job
-    ProcessEngineConfiguration
+    TestProcessEngineConfiguration
       .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/history/no-batchwindow.camunda.cfg.xml")
       .buildProcessEngine()
       .close();
 
     // then
     // reconfigure history cleanup job
-    ProcessEngineConfiguration processEngineConfiguration = ProcessEngineConfiguration
+    ProcessEngineConfiguration processEngineConfiguration = TestProcessEngineConfiguration
       .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/history/batchwindow.camunda.cfg.xml");
     processEngineConfiguration.setProcessEngineName(ENGINE_NAME);
     ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();
@@ -93,7 +94,7 @@ public class HistoryCleanupOnEngineBootstrapTest {
   public void testDecreaseNumberOfHistoryCleanupJobs() {
     // given
     // create history cleanup job
-    ProcessEngine engine = ProcessEngineConfiguration
+    ProcessEngine engine = TestProcessEngineConfiguration
       .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/history/history-cleanup-parallelism-default.camunda.cfg.xml")
       .buildProcessEngine();
 
@@ -104,7 +105,7 @@ public class HistoryCleanupOnEngineBootstrapTest {
     engine.close();
 
     // when
-    engine = ProcessEngineConfiguration
+    engine = TestProcessEngineConfiguration
     .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/history/history-cleanup-parallelism-less.camunda.cfg.xml")
       .buildProcessEngine();
 
@@ -124,7 +125,7 @@ public class HistoryCleanupOnEngineBootstrapTest {
   public void testIncreaseNumberOfHistoryCleanupJobs() {
     // given
     // create history cleanup job
-    ProcessEngine engine = ProcessEngineConfiguration
+    ProcessEngine engine = TestProcessEngineConfiguration
       .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/history/history-cleanup-parallelism-default.camunda.cfg.xml")
       .buildProcessEngine();
 
@@ -135,7 +136,7 @@ public class HistoryCleanupOnEngineBootstrapTest {
     engine.close();
 
     // when
-    engine = ProcessEngineConfiguration
+    engine = TestProcessEngineConfiguration
     .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/history/history-cleanup-parallelism-more.camunda.cfg.xml")
       .buildProcessEngine();
 
@@ -186,7 +187,7 @@ public class HistoryCleanupOnEngineBootstrapTest {
     thrown.expect(Exception.class);
     thrown.expectMessage("startTime");
 
-    ProcessEngineConfiguration
+    TestProcessEngineConfiguration
       .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/history/history-cleanup-batch-window-map-wrong-values.camunda.cfg.xml")
       .buildProcessEngine();
   }
@@ -199,7 +200,7 @@ public class HistoryCleanupOnEngineBootstrapTest {
 
     //when
     //we configure batch window only for Wednesday and start the server
-    ProcessEngine engine = ProcessEngineConfiguration
+    ProcessEngine engine = TestProcessEngineConfiguration
       .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/history/history-cleanup-batch-window-map.camunda.cfg.xml")
       .buildProcessEngine();
 
@@ -215,7 +216,7 @@ public class HistoryCleanupOnEngineBootstrapTest {
 
     //when
     //we reconfigure batch window with default values
-    engine = ProcessEngineConfiguration
+    engine = TestProcessEngineConfiguration
       .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/history/history-cleanup-batch-window-default.camunda.cfg.xml")
       .buildProcessEngine();
 

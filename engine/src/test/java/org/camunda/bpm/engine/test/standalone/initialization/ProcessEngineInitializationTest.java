@@ -16,12 +16,13 @@
  */
 package org.camunda.bpm.engine.test.standalone.initialization;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
-import static org.assertj.core.api.Assertions.assertThat;
 
 import org.camunda.bpm.engine.ProcessEngineConfiguration;
 import org.camunda.bpm.engine.impl.persistence.entity.JobEntity;
+import org.camunda.bpm.engine.test.util.TestProcessEngineConfiguration;
 import org.junit.Test;
 
 /**
@@ -34,7 +35,7 @@ public class ProcessEngineInitializationTest {
   @Test
   public void testNoTables() {
     try {
-      ProcessEngineConfiguration
+      TestProcessEngineConfiguration
       .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/standalone/initialization/notables.camunda.cfg.xml")
         .buildProcessEngine();
       fail("expected exception");
@@ -49,7 +50,7 @@ public class ProcessEngineInitializationTest {
 
   @Test
   public void testDefaultRetries() {
-    ProcessEngineConfiguration configuration = ProcessEngineConfiguration
+    ProcessEngineConfiguration configuration = TestProcessEngineConfiguration
       .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/standalone/initialization/defaultretries.camunda.cfg.xml");
 
     assertEquals(JobEntity.DEFAULT_RETRIES, configuration.getDefaultNumberOfRetries());
@@ -57,7 +58,7 @@ public class ProcessEngineInitializationTest {
 
   @Test
   public void testCustomDefaultRetries() {
-    ProcessEngineConfiguration configuration = ProcessEngineConfiguration
+    ProcessEngineConfiguration configuration = TestProcessEngineConfiguration
       .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/standalone/initialization/customdefaultretries.camunda.cfg.xml");
 
     assertEquals(5, configuration.getDefaultNumberOfRetries());

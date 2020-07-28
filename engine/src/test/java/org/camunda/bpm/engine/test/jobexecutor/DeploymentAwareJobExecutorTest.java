@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.ProcessEngineConfiguration;
 import org.camunda.bpm.engine.ProcessEngineException;
 import org.camunda.bpm.engine.ProcessEngines;
 import org.camunda.bpm.engine.RepositoryService;
@@ -44,6 +43,7 @@ import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.engine.runtime.Job;
 import org.camunda.bpm.engine.test.Deployment;
 import org.camunda.bpm.engine.test.util.PluggableProcessEngineTest;
+import org.camunda.bpm.engine.test.util.TestProcessEngineConfiguration;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -205,12 +205,12 @@ public class DeploymentAwareJobExecutorTest extends PluggableProcessEngineTest {
   private String deployAndInstantiateWithNewEngineConfiguration(String resource) {
     // 1. create another process engine
     try {
-      otherProcessEngine = ProcessEngineConfiguration
+      otherProcessEngine = TestProcessEngineConfiguration
         .createProcessEngineConfigurationFromResource("camunda.cfg.xml")
         .buildProcessEngine();
     } catch (RuntimeException ex) {
       if (ex.getCause() != null && ex.getCause() instanceof FileNotFoundException) {
-        otherProcessEngine = ProcessEngineConfiguration
+        otherProcessEngine = TestProcessEngineConfiguration
           .createProcessEngineConfigurationFromResource("activiti.cfg.xml")
           .buildProcessEngine();
       } else {

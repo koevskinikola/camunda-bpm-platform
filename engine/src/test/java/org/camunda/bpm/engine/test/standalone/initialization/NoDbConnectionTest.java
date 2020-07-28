@@ -21,7 +21,7 @@ import static org.junit.Assert.fail;
 
 import java.sql.SQLException;
 
-import org.camunda.bpm.engine.ProcessEngineConfiguration;
+import org.camunda.bpm.engine.test.util.TestProcessEngineConfiguration;
 import org.junit.Test;
 
 /**
@@ -32,7 +32,7 @@ public class NoDbConnectionTest {
   @Test
   public void testNoDbConnection() {
     try {
-      ProcessEngineConfiguration
+      TestProcessEngineConfiguration
         .createProcessEngineConfigurationFromResource("org/camunda/bpm/engine/test/standalone/initialization/nodbconnection.camunda.cfg.xml")
         .buildProcessEngine();
       fail("expected exception");
