@@ -34,6 +34,7 @@ import org.camunda.bpm.qa.rolling.update.scenarios.task.ProcessWithUserTaskAndTi
 import org.camunda.bpm.qa.rolling.update.scenarios.task.ProcessWithUserTaskScenario;
 import org.camunda.bpm.qa.rolling.update.scenarios.timestamp.IncidentTimestampUpdateScenario;
 import org.camunda.bpm.qa.rolling.update.scenarios.timestamp.JobTimestampsUpdateScenario;
+import org.camunda.bpm.qa.upgrade.ProcessEngineConfigurator;
 import org.camunda.bpm.qa.upgrade.ScenarioRunner;
 
 /**
@@ -57,7 +58,7 @@ public class TestFixture {
     }
     currentFixtureTag = tag;
 
-    ProcessEngineConfigurationImpl processEngineConfiguration = (ProcessEngineConfigurationImpl) ProcessEngineConfiguration
+    ProcessEngineConfigurationImpl processEngineConfiguration = ProcessEngineConfigurator
       .createProcessEngineConfigurationFromResource("camunda.cfg.xml");
     ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();
 

@@ -16,34 +16,24 @@
  */
 package org.camunda.bpm.qa.upgrade;
 
-
-import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.ProcessEngineConfiguration;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
-import org.camunda.bpm.qa.upgrade.user.creation.DeployUserWithoutSaltForPasswordHashingScenario;
+import org.camunda.commons.testcontainers.DatabaseContainerProvider;
 
-/**
- * Sets up scenarios for migration from 7.6.0
- *
- */
-public class TestFixture {
+public class ProcessEngineConfigurator {
 
-  public static final String ENGINE_VERSION = "7.6.0";
+  public static ProcessEngineConfigurationImpl createProcessEngineConfigurationFromResource(String configurationResource) {
+      ProcessEngineConfigurationImpl configuration = (ProcessEngineConfigurationImpl) ProcessEngineConfiguration
+        .createProcessEngineConfigurationFromResource(configurationResource);
 
-  public TestFixture(ProcessEngine processEngine) {
-  }
+      if (!configuration.getJdbcUrl().contains("h2")) {
+          DatabaseContainerProvider databaseProvider = new DatabaseContainerProvider();
+          databaseProvider.startDatabase();
+          if (databaseProvider.isDbContainerAvailable()) {
+              configuration.setJdbcUrl(databaseProvider.getJdbcUrl());
+          }
+      }
 
-  public static void main(String[] args) {
-    ProcessEngineConfigurationImpl processEngineConfiguration = ProcessEngineConfigurator
-      .createProcessEngineConfigurationFromResource("camunda.cfg.xml");
-    ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();
-
-    // register test scenarios
-    ScenarioRunner runner = new ScenarioRunner(processEngine, ENGINE_VERSION);
-
-    // compensation
-    runner.setupScenarios(DeployUserWithoutSaltForPasswordHashingScenario.class);
-
-    processEngine.close();
+      return configuration;
   }
 }

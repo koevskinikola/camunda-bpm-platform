@@ -30,7 +30,7 @@ public class TestFixture {
   }
 
   public static void main(String[] args) {
-    ProcessEngineConfigurationImpl processEngineConfiguration = (ProcessEngineConfigurationImpl) ProcessEngineConfiguration
+    ProcessEngineConfigurationImpl processEngineConfiguration = ProcessEngineConfigurator
       .createProcessEngineConfigurationFromResource("camunda.cfg.xml");
     ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();
 

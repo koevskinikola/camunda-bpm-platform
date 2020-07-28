@@ -17,6 +17,7 @@
 package org.camunda.bpm.qa.upgrade;
 
 import org.camunda.bpm.engine.history.HistoricProcessInstance;
+import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.management.JobDefinitionQuery;
 import org.camunda.bpm.engine.runtime.CaseExecutionQuery;
 import org.camunda.bpm.engine.runtime.CaseInstance;
@@ -43,6 +44,13 @@ public class UpgradeTestRule extends ProcessEngineRule {
 
   public UpgradeTestRule() {
     super("camunda.cfg.xml");
+  }
+
+  @Override
+  protected void initializeProcessEngine() {
+    ProcessEngineConfigurationImpl configuration = ProcessEngineConfigurator
+        .createProcessEngineConfigurationFromResource(this.configurationResource);
+    this.processEngine = configuration.buildProcessEngine();
   }
 
   public UpgradeTestRule(String configurationResource) {

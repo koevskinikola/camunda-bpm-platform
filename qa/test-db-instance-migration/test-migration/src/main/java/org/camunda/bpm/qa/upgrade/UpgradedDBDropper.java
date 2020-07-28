@@ -32,7 +32,7 @@ import java.util.List;
 public class UpgradedDBDropper {
 
   public static void main(String[] args) {
-    ProcessEngine engine = ProcessEngineConfiguration
+    ProcessEngine engine = ProcessEngineConfigurator
         .createProcessEngineConfigurationFromResource("camunda.cfg.xml").buildProcessEngine();
 
     UpgradedDBDropper fixture = new UpgradedDBDropper();
