@@ -34,6 +34,11 @@ import org.junit.Test;
  */
 public class ProcessEngineTestCaseTest extends ProcessEngineTestCase {
 
+  @Override
+  public String getConfigurationResource() {
+    return "camunda.cfg.h2.xml";
+  }
+
   @Deployment
   @Test
   public void testSimpleProcess() {
