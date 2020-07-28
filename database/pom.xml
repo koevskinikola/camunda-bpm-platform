@@ -557,6 +557,13 @@
         </pluginManagement>
       </build>
     </profile>
+
+    <profile>
+      <id>testcontainers</id>
+      <properties>
+        <db.image>${database.type}</db.image>
+      </properties>
+    </profile>
   </profiles>
 
 </project>

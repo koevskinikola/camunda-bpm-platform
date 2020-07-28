@@ -1,0 +1,6 @@
+registry.camunda.com/camunda-ci-db2:11.1
+registry.camunda.com/camunda-ci-db2:10.5
+registry.camunda.com/camunda-ci-sqlserver:2012
+registry.camunda.com/camunda-ci-sqlserver:2014
+mcr.microsoft.com/mssql/server:2017-latest
+mcr.microsoft.com/mssql/server:2019-latest

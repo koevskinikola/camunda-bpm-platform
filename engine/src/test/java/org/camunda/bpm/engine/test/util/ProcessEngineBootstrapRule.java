@@ -53,7 +53,7 @@ public class ProcessEngineBootstrapRule extends TestWatcher {
   }
 
   public ProcessEngine bootstrapEngine(String configurationResource) {
-    ProcessEngineConfigurationImpl processEngineConfiguration = (ProcessEngineConfigurationImpl) ProcessEngineConfiguration
+    ProcessEngineConfigurationImpl processEngineConfiguration = (ProcessEngineConfigurationImpl) TestProcessEngineConfiguration
       .createProcessEngineConfigurationFromResource(configurationResource);
     configureEngine(processEngineConfiguration);
     return processEngineConfiguration.buildProcessEngine();

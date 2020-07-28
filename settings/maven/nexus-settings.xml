@@ -12,6 +12,20 @@
   </mirrors>
 
   <profiles>
+
+    <!-- H2 Profiles -->
+    <profile>
+      <id>h2</id>
+      <properties>
+        <database.host>${project.parent.basedir}/target/h2/</database.host>
+        <database.port>9999</database.port>
+        <database.name>process-engine</database.name>
+        <database.username>sa</database.username>
+        <database.password>sa</database.password>
+      </properties>
+    </profile>
+
+    <!-- DB2 Profiles -->
     <profile>
       <id>cockroachdb</id>
       <properties>
@@ -32,18 +46,26 @@
         <database.username>camunda</database.username>
         <database.password>camunda</database.password>
         <database.url>jdbc:db2://${database.host}:${database.port}/${database.name}</database.url>
+        <!-- Camunda Docker image -->
+        <db2.container.image>registry.camunda.com/camunda-ci-db2:11.1</db2.container.image>
       </properties>
     </profile>
     <profile>
-      <id>h2</id>
+      <id>db2-11.1</id>
       <properties>
-        <database.host>${project.parent.basedir}/target/h2/</database.host>
-        <database.port>9999</database.port>
-        <database.name>process-engine</database.name>
-        <database.username>sa</database.username>
-        <database.password>sa</database.password>
+        <!-- Camunda Docker image -->
+        <db2.container.image>registry.camunda.com/camunda-ci-db2:11.1</db2.container.image>
       </properties>
     </profile>
+    <profile>
+      <id>db2-10.5</id>
+      <properties>
+        <!-- Camunda Docker image -->
+        <db2.container.image>registry.camunda.com/camunda-ci-db2:10.5</db2.container.image>
+      </properties>
+    </profile>
+
+    <!-- MariaDB Profiles -->
     <profile>
       <id>mariadb</id>
       <properties>
@@ -53,8 +75,31 @@
         <database.username>camunda</database.username>
         <database.password>camunda</database.password>
         <database.url>jdbc:mariadb://${database.host}:${database.port}/${database.name}</database.url>
+        <mariadb.container.image>mariadb:10.3.22</mariadb.container.image>
       </properties>
     </profile>
+    <profile>
+      <id>mariadb-10.3</id>
+      <properties>
+        <mariadb.container.image>mariadb:10.3.22</mariadb.container.image>
+      </properties>
+    </profile>
+    <profile>
+      <id>mariadb-10.2</id>
+      <properties>
+        <mariadb.container.image>mariadb:10.2.31</mariadb.container.image>
+      </properties>
+    </profile>
+    <profile>
+      <id>mariadb-10.0</id>
+      <properties>
+        <mariadb.container.image>mariadb:10.0.38</mariadb.container.image>
+        <!-- Camunda Docker image -->
+        <!-- <mariadb.container.image>registry.camunda.com/camunda-ci-mariadb:10.0</mariadb.container.image> -->
+      </properties>
+    </profile>
+
+    <!-- MySQL Profiles -->
     <profile>
       <id>mysql</id>
       <properties>
@@ -64,8 +109,27 @@
         <database.username>camunda</database.username>
         <database.password>camunda</database.password>
         <database.url>jdbc:mysql://${database.host}:${database.port}/${database.name}</database.url>
+        <mysql.container.image>mysql:5.7.29</mysql.container.image>
       </properties>
     </profile>
+    <profile>
+      <id>mysql-5.7</id>
+      <properties>
+        <mysql.container.image>mysql:5.7.29</mysql.container.image>
+        <!-- Camunda Docker image -->
+        <!-- <mysql.container.image>registry.camunda.com/camunda-ci-mysql:5.7</mysql.container.image> -->
+      </properties>
+    </profile>
+    <profile>
+      <id>mysql-5.6</id>
+      <properties>
+        <mysql.container.image>mysql:5.6.47</mysql.container.image>
+        <!-- Camunda Docker image -->
+        <!-- <mysql.container.image>registry.camunda.com/camunda-ci-mysql:5.6</mysql.container.image> -->
+      </properties>
+    </profile>
+
+    <!-- Oracle Profiles -->
     <profile>
       <id>oracle</id>
       <properties>
@@ -75,20 +139,40 @@
         <database.username>camunda</database.username>
         <database.password>camunda</database.password>
         <database.url>jdbc:oracle:thin:@${database.host}:${database.port}:${database.name}</database.url>
-      </properties>
-    </profile>
-    <profile>
-      <id>oracle-12</id>
-      <properties>
-        <database.name>orcl</database.name>
+        <oracle.container.image>registry.camunda.com/camunda-ci-oracle:11</oracle.container.image>
       </properties>
     </profile>
     <profile>
       <id>oracle-19</id>
       <properties>
         <database.name>orclcdb</database.name>
+        <!-- Oracle 10 Docker Image needed -->
+        <!-- <oracle.container.image>registry.camunda.com/camunda-ci-oracle:18</oracle.container.image> -->
       </properties>
     </profile>
+    <profile>
+      <id>oracle-18</id>
+      <properties>
+        <database.name>xe</database.name>
+        <oracle.container.image>registry.camunda.com/camunda-ci-oracle:18</oracle.container.image>
+      </properties>
+    </profile>
+    <profile>
+      <id>oracle-12</id>
+      <properties>
+        <database.name>orcl</database.name>
+        <oracle.container.image>registry.camunda.com/camunda-ci-oracle:12</oracle.container.image>
+      </properties>
+    </profile>
+    <profile>
+      <id>oracle-11</id>
+      <properties>
+        <database.name>orcl</database.name>
+        <oracle.container.image>registry.camunda.com/camunda-ci-oracle:11</oracle.container.image>
+      </properties>
+    </profile>
+
+    <!-- PostgreSQL Profiles -->
     <profile>
       <id>postgresql</id>
       <properties>
@@ -98,18 +182,96 @@
         <database.username>camunda</database.username>
         <database.password>camunda</database.password>
         <database.url>jdbc:postgresql://${database.host}:${database.port}/${database.name}</database.url>
+        <postgres.container.image>postgres:9.6.17</postgres.container.image>
       </properties>
     </profile>
+    <profile>
+      <id>postgresql-11.2</id>
+      <properties>
+        <postgres.container.image>postgres:11.2</postgres.container.image>
+      </properties>
+    </profile>
+    <profile>
+      <id>postgresql-11.1</id>
+      <properties>
+        <postgres.container.image>postgres:11.1</postgres.container.image>
+      </properties>
+    </profile>
+    <profile>
+      <id>postgresql-10.7</id>
+      <properties>
+        <postgres.container.image>postgres:10.7</postgres.container.image>
+      </properties>
+    </profile>
+    <profile>
+      <id>postgresql-10.4</id>
+      <properties>
+        <postgres.container.image>postgres:10.4</postgres.container.image>
+      </properties>
+    </profile>
+    <profile>
+      <id>postgresql-9.6</id>
+      <properties>
+        <postgres.container.image>postgres:9.6.17</postgres.container.image>
+        <!-- Camunda Docker image -->
+        <!-- <postgres.container.image>registry.camunda.com/camunda-ci-postgres:9.6</postgres.container.image> -->
+      </properties>
+    </profile>
+    <profile>
+      <id>postgresql-9.4</id>
+      <properties>
+        <postgres.container.image>postgres:9.4.26</postgres.container.image>
+        <!-- Camunda Docker image -->
+        <!-- <postgres.container.image>registry.camunda.com/camunda-ci-postgres:9.4</postgres.container.image> -->
+      </properties>
+    </profile>
+
+    <!-- SqlServer Profiles -->
     <profile>
       <id>sqlserver</id>
       <properties>
         <database.host>localhost</database.host>
         <database.port>1433</database.port>
-        <database.name>process-engine</database.name>
+        <database.name>processEngine</database.name>
         <database.username>camunda</database.username>
         <database.password>Camunda-BPM123</database.password>
         <database.url>jdbc:sqlserver://${database.host}:${database.port};DatabaseName=${database.name}</database.url>
+        <!-- Camunda Docker image -->
+        <mssql.container.image>registry.camunda.com/camunda-ci-sqlserver:2012</mssql.container.image>
       </properties>
     </profile>
+    <profile>
+      <id>sqlserver-2017</id>
+      <properties>
+        <database.name>master</database.name>
+        <database.username>SA</database.username>
+        <database.password>camunda_123</database.password>
+        <mssql.container.image>mcr.microsoft.com/mssql/server:2017-latest</mssql.container.image>
+      </properties>
+    </profile>
+    <profile>
+      <id>sqlserver-2014</id>
+      <properties>
+        <!-- Camunda Docker image -->
+        <mssql.container.image>registry.camunda.com/camunda-ci-sqlserver:2014</mssql.container.image>
+      </properties>
+    </profile>
+    <profile>
+      <id>sqlserver-2012</id>
+      <properties>
+        <!-- Camunda Docker image -->
+        <mssql.container.image>registry.camunda.com/camunda-ci-sqlserver:2012</mssql.container.image>
+      </properties>
+    </profile>
+    <profile>
+      <id>sqlserver-2019</id>
+      <properties>
+        <database.name>master</database.name>
+        <database.username>SA</database.username>
+        <database.password>camunda_123</database.password>
+        <mssql.container.image>mcr.microsoft.com/mssql/server:2019-latest</mssql.container.image>
+      </properties>
+    </profile>
+
   </profiles>
 </settings>

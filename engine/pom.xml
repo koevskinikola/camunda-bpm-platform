@@ -120,7 +120,7 @@
       <groupId>org.camunda.connect</groupId>
       <artifactId>camunda-connect-connectors-all</artifactId>
       <scope>runtime</scope>
-    </dependency> 
+    </dependency>
 
     <!-- provided dependencies -->
 
@@ -141,7 +141,7 @@
       <artifactId>hibernate-jpa-2.0-api</artifactId>
       <scope>provided</scope>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
       <artifactId>geronimo-jta_1.1_spec</artifactId>
@@ -290,6 +290,7 @@
       <artifactId>wiremock</artifactId>
       <scope>test</scope>
     </dependency>
+
   </dependencies>
 
 
@@ -301,7 +302,7 @@
     <mail.server.port>5025</mail.server.port>
     <authorizationCheckRevokes>auto</authorizationCheckRevokes>
     <jdbcBatchProcessing>true</jdbcBatchProcessing>
-    
+
     <!-- We shade artifacts into the jar, so we need to generate a dependency BOM
     for the license book -->
     <skip-third-party-bom>false</skip-third-party-bom>
@@ -354,6 +355,7 @@
           <include>**/*camunda.cfg.xml</include>
           <include>**/camunda.cfg.*.xml</include>
           <include>testconfig.properties</include>
+          <include>**/testcontainers.properties</include>
         </includes>
       </testResource>
     </testResources>

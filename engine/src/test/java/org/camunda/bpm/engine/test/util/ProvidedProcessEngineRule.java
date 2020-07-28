@@ -19,7 +19,6 @@ package org.camunda.bpm.engine.test.util;
 import java.util.concurrent.Callable;
 
 import org.camunda.bpm.engine.ProcessEngine;
-import org.camunda.bpm.engine.ProcessEngineConfiguration;
 import org.camunda.bpm.engine.test.ProcessEngineRule;
 
 public class ProvidedProcessEngineRule extends ProcessEngineRule {
@@ -67,7 +66,7 @@ public class ProvidedProcessEngineRule extends ProcessEngineRule {
   
   protected static ProcessEngine getOrInitializeCachedProcessEngine() {
     if (cachedProcessEngine == null) {
-      cachedProcessEngine = ProcessEngineConfiguration
+      cachedProcessEngine = TestProcessEngineConfiguration
           .createProcessEngineConfigurationFromResource("camunda.cfg.xml")
           .buildProcessEngine();
     }
