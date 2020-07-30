@@ -561,7 +561,7 @@
     <profile>
       <id>testcontainers</id>
       <properties>
-        <db.image>${database.type}</db.image>
+        <db.type>${database.type}</db.type>
       </properties>
     </profile>
   </profiles>

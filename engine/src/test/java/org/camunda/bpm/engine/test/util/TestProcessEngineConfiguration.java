@@ -19,7 +19,8 @@ package org.camunda.bpm.engine.test.util;
 import org.camunda.bpm.engine.ProcessEngineConfiguration;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration;
-import org.camunda.commons.testconainers.DatabaseContainerProvider;
+import org.camunda.commons.testcontainers.DatabaseContainerProvider;
+import org.testcontainers.utility.TestcontainersConfiguration;
 
 public class TestProcessEngineConfiguration extends StandaloneProcessEngineConfiguration {
 
@@ -30,7 +31,8 @@ public class TestProcessEngineConfiguration extends StandaloneProcessEngineConfi
         .createProcessEngineConfigurationFromResource(resource);
 
     if (!configuration.getJdbcUrl().contains("h2")) {
-      DatabaseContainerProvider databaseProvider = new DatabaseContainerProvider();
+      String databaseType = TestcontainersConfiguration.getInstance().getProperties().getProperty("db.type");
+      DatabaseContainerProvider databaseProvider = new DatabaseContainerProvider(databaseType);
       databaseProvider.startDatabase();
       if (databaseProvider.getDbContainer() != null) {
         configuration.setJdbcUrl(databaseProvider.getJdbcUrl());
