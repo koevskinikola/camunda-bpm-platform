@@ -19,6 +19,7 @@ package org.camunda.bpm.qa.upgrade;
 import org.camunda.bpm.engine.ProcessEngineConfiguration;
 import org.camunda.bpm.engine.impl.cfg.ProcessEngineConfigurationImpl;
 import org.camunda.commons.testcontainers.DatabaseContainerProvider;
+import org.testcontainers.utility.TestcontainersConfiguration;
 
 public class ProcessEngineConfigurator {
 
@@ -27,7 +28,8 @@ public class ProcessEngineConfigurator {
         .createProcessEngineConfigurationFromResource(configurationResource);
 
       if (!configuration.getJdbcUrl().contains("h2")) {
-          DatabaseContainerProvider databaseProvider = new DatabaseContainerProvider();
+          String databaseType = TestcontainersConfiguration.getInstance().getProperties().getProperty("db.type");
+          DatabaseContainerProvider databaseProvider = new DatabaseContainerProvider(databaseType);
           databaseProvider.startDatabase();
           if (databaseProvider.isDbContainerAvailable()) {
               configuration.setJdbcUrl(databaseProvider.getJdbcUrl());
